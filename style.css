@@ -48,9 +48,6 @@ body, html {
     flex-wrap: wrap;
 }
 
-.erase {
-    background-color: gray;
-}
 
 button {
     padding: .5rem 1rem;

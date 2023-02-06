@@ -15,39 +15,40 @@ function createGrid() {
     }
 }
 
-function draw(){
+function setSquareColor(color) {
     const squares = document.querySelectorAll('.grid-col');
     squares.forEach(square => square.addEventListener('mousemove', (e) => {
             if(e.buttons == 1) { //checks if the mouse button is down
-                square.style.cssText = 'background-color: black';
+                square.style.backgroundColor = color;
             }
     }));
 }
 
+function draw(){
+    setSquareColor('black');
+}
+
 function clear(){
-    const squares = document.querySelectorAll('.grid-col');
     const clearButton = document.querySelector(".clear");
+    const squares = document.querySelectorAll('.grid-col');
     clearButton.addEventListener('click', () => {
         squares.forEach(square => square.style.cssText = 'background-color: white');
     });
 }
 
 function erase(){
-    const squares = document.querySelectorAll('.grid-col');
     const eraseButton = document.querySelector('.eraser');
+    const rainbowButton = document.querySelector('.rainbow');
     eraseButton.addEventListener('click', () => { 
         eraseButton.classList.toggle('.erase');
         if(eraseButton.classList.contains('.erase')) {
+            rainbowButton.disabled = true;
             eraseButton.style.backgroundColor = '#DEDEDE';
-            squares.forEach(square => square.addEventListener('mousemove', (e) => {
-            if(e.buttons == 1) { //checks if the mouse button is down
-                square.style.cssText = 'background-color: white';
-                }
-        }));
+            setSquareColor('white');
         } else {
             eraseButton.style.backgroundColor = 'white';
+            rainbowButton.disabled = false;
             draw();
-
         }
     });
 }
@@ -55,9 +56,11 @@ function erase(){
 function rainbow(){
     const squares = document.querySelectorAll('.grid-col');
     const rainbowButton = document.querySelector('.rainbow');
+    const eraseButton = document.querySelector('.eraser');
     rainbowButton.addEventListener('click', () => {
         rainbowButton.classList.toggle('.color');
         if(rainbowButton.classList.contains('.color')) {
+            eraseButton.disabled = true;
             rainbowButton.style.backgroundColor = '#DEDEDE';
             squares.forEach(square => square.addEventListener('mousemove', (e) => {
                 if(e.buttons == 1) { //checks if the mouse button is down
@@ -67,6 +70,7 @@ function rainbow(){
             }));
             } else {
                 rainbowButton.style.backgroundColor = 'white';
+                eraseButton.disabled = false;
                 draw();
     
             }
