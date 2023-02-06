@@ -1,0 +1,18 @@
+body, html {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    background-color: aquamarine;
+    width: 35rem;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+}
