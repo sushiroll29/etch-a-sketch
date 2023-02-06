@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .container {
@@ -9,10 +10,32 @@ body, html {
     align-items: center;
 }
 
+.container h1 {
+    font-family: 'Fredoka One', sans-serif;
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+}
+
 .grid {
-    background-color: aquamarine;
+    background-color: white;
     width: 35rem;
     height: 35rem;
     display: flex;
     flex-direction: column;
+    border: .8px solid #cccccc;
+    border-radius: 2px;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-row, .grid-col {
+    display: flex; 
+    flex: 1; 
+    margin: 0; 
+    padding: 0;
+}
+
+.grid-col {
+    border: .2px solid #cccccc;
+    border-radius: .5px;
 }
