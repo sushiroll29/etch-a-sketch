@@ -39,3 +39,7 @@ body, html {
     border: .2px solid #cccccc;
     border-radius: .5px;
 }
+
+.erase {
+    background-color: gray;
+}
