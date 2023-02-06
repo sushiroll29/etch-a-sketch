@@ -1,4 +1,4 @@
-const squares = document.querySelectorAll('.grid-col');
+
 
 function createGrid() {
     const gridContainer = document.querySelector('.grid');
@@ -17,6 +17,7 @@ function createGrid() {
 }
 
 function draw(){
+    const squares = document.querySelectorAll('.grid-col');
     squares.forEach(square => square.addEventListener('mousemove', (e) => {
             if(e.buttons == 1) { //if the mouse button is down
                 square.style.cssText = 'background-color: black';
@@ -25,9 +26,14 @@ function draw(){
 }
 
 function clear(){
-    squares.forEach(square => square.style.cssText = 'background-color: white');
+    const squares = document.querySelectorAll('.grid-col');
+    const clearButton = document.querySelector(".clear-b");
+    clearButton.addEventListener('click', () => {
+        squares.forEach(square => square.style.cssText = 'background-color: white');
+    });
 }
 
 
 createGrid();
 draw();
+clear();
