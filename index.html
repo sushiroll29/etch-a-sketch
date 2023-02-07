@@ -10,20 +10,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Etch-A-Sketch</h1>
-        <div class="grid"></div>
-        <div class="options">
-            <input type="color" class="color-picker">
-            <button class="rainbow">Rainbow</button>
-            <button class="eraser">Eraser</button>
-            <button class="clear">Clear screen</button>
+        <div class="screen">
+            <div class="container">
+                <h1>Etch-A-Sketch</h1>
+                <div class="grid"></div>
+            </div>
+            <div class="options">
+                    <label for="color-picker">Pick a color</label>
+                    <input type="color" class="color-picker" id="color-picker">
+                    <button class="rainbow">Rainbow</button>
+                    <button class="eraser">Eraser</button>
+                    <button class="clear">Clear screen</button>
+                    <button class="size">Change grid size</button>
+            </div>
         </div>
-        <div class="grid-size">
-            <button class="size">Change grid size</button>
-        </div>
-    </div>
+        <footer class="footer">
+            <p>Copyright © 2023 sushiroll29</p>
+            <a href="https://github.com/sushiroll29/etch-a-sketch"><i class="fa fa-github"></i></a>
+        </footer>
 </body>
 </html>

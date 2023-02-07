@@ -5,7 +5,7 @@ const clearButton = document.querySelector(".clear");
 const gridContainer = document.querySelector('.grid');
 const colorPicker = document.querySelector('.color-picker');
 const defaultColor = 'black';
-const activeButton = '#DEDEDE';
+const activeButton = '#eeeeee';
 const inactiveButton = 'white';
 
 //functions
@@ -79,12 +79,14 @@ function eraseHandler(){
     colorPicker.value = defaultColor;
 
     if(eraseButton.classList.contains('.erase')) {
-            rainbowButton.disabled = true;
-            eraseButton.style.backgroundColor = activeButton;
-            setSquareColor('white');
+        rainbowButton.disabled = true;
+        colorPicker.disabled = true;
+        eraseButton.style.backgroundColor = activeButton;
+        setSquareColor('white');
     } else {
         eraseButton.style.backgroundColor = inactiveButton;
         rainbowButton.disabled = false;
+        colorPicker.disabled = false;
         draw();
     }
 }
@@ -97,6 +99,7 @@ function rainbowHandler() {
 
     if(rainbowButton.classList.contains('.color')) {
         eraseButton.disabled = true;
+        colorPicker.disabled = true;
         rainbowButton.style.backgroundColor = activeButton;
         squares.forEach(square => square.addEventListener('mousemove', (e) => {
             if(e.buttons == 1) { //checks if the mouse button is down
@@ -107,6 +110,7 @@ function rainbowHandler() {
     } else {
         rainbowButton.style.backgroundColor = inactiveButton;
         eraseButton.disabled = false;
+        colorPicker.disabled = false;
         draw();
         }
 }
@@ -120,7 +124,9 @@ function changeSizeHandler(){
     colorPicker.value = defaultColor;
 
     rainbowButton.removeEventListener('click', rainbowHandler);
+    rainbowButton.style.backgroundColor = inactiveButton;
     eraseButton.removeEventListener('click', eraseHandler);
+    eraseButton.style.backgroundColor = inactiveButton;
 
     //removes all the old rows and columns and creates new ones
     cols.forEach(col => col.remove());
