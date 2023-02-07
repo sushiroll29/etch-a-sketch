@@ -4,7 +4,7 @@ const rainbowButton = document.querySelector('.rainbow');
 const clearButton = document.querySelector(".clear");
 const gridContainer = document.querySelector('.grid');
 const colorPicker = document.querySelector('.color-picker');
-const defaultColor = 'black';
+const defaultColor = '#222222;';
 const activeButton = '#eeeeee';
 const inactiveButton = 'white';
 
