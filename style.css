@@ -36,7 +36,7 @@ body, html {
 }
 
 .grid-col {
-    border: .2px solid #cccccc;
+    border: .1px solid #cccccc;
     border-radius: .5px;
 }
 
@@ -64,6 +64,13 @@ button {
 }
 
 .color-picker {
-    width: 1.5rem;
-    align-self: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    align-self: flex-end;
+    border: 0;
+    margin: 0;
+}
+
+.grid-size {
+    margin-bottom: 1.4rem;
 }

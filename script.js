@@ -3,6 +3,10 @@ const eraseButton = document.querySelector('.eraser');
 const rainbowButton = document.querySelector('.rainbow');
 const clearButton = document.querySelector(".clear");
 const gridContainer = document.querySelector('.grid');
+const colorPicker = document.querySelector('.color-picker');
+const defaultColor = 'black';
+const activeButton = '#DEDEDE';
+const inactiveButton = 'white';
 
 //functions
 function createGrid(gridSize) {
@@ -18,9 +22,10 @@ function createGrid(gridSize) {
     gridContainer.appendChild(gridRow);
     }
 draw();
-clear();
-erase();
+pickColor();
 rainbow();
+erase();
+clear();
 }
 
 function setSquareColor(color) {
@@ -33,7 +38,15 @@ function setSquareColor(color) {
 }
 
 function draw(){
-    setSquareColor('black');
+    setSquareColor(defaultColor);
+}
+
+function pickColor() {
+    colorPicker.addEventListener('input', pickColorHandler);
+}
+
+function pickColorHandler(e) {
+    setSquareColor(e.target.value);
 }
 
 function clear(){
@@ -63,46 +76,55 @@ changeSize();
 //handlers
 function eraseHandler(){
     eraseButton.classList.toggle('.erase');
-        if(eraseButton.classList.contains('.erase')) {
+    colorPicker.value = defaultColor;
+
+    if(eraseButton.classList.contains('.erase')) {
             rainbowButton.disabled = true;
-            eraseButton.style.backgroundColor = '#DEDEDE';
+            eraseButton.style.backgroundColor = activeButton;
             setSquareColor('white');
-        } else {
-            eraseButton.style.backgroundColor = 'white';
-            rainbowButton.disabled = false;
-            draw();
-        }
+    } else {
+        eraseButton.style.backgroundColor = inactiveButton;
+        rainbowButton.disabled = false;
+        draw();
+    }
 }
 
 function rainbowHandler() {
     const squares = document.querySelectorAll('.grid-col');
+
     rainbowButton.classList.toggle('.color');
-        if(rainbowButton.classList.contains('.color')) {
-            eraseButton.disabled = true;
-            rainbowButton.style.backgroundColor = '#DEDEDE';
-            squares.forEach(square => square.addEventListener('mousemove', (e) => {
-                if(e.buttons == 1) { //checks if the mouse button is down
-                    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                    square.style.backgroundColor = '#' + randomColor;
-                    }
+    colorPicker.value = defaultColor;
+
+    if(rainbowButton.classList.contains('.color')) {
+        eraseButton.disabled = true;
+        rainbowButton.style.backgroundColor = activeButton;
+        squares.forEach(square => square.addEventListener('mousemove', (e) => {
+            if(e.buttons == 1) { //checks if the mouse button is down
+                const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                square.style.backgroundColor = '#' + randomColor;
+                }
             }));
-        } else {
-            rainbowButton.style.backgroundColor = 'white';
-            eraseButton.disabled = false;
-            draw();
+    } else {
+        rainbowButton.style.backgroundColor = inactiveButton;
+        eraseButton.disabled = false;
+        draw();
         }
 }
 
 function changeSizeHandler(){
-    let size = prompt("What size do you want the grid to be? (max. 100)");
     let cols = document.querySelectorAll('.grid-col');
     let rows = document.querySelectorAll('.grid-row');
-    
+    let newGridSize = prompt("What size do you want the new grid to be? (max. 100)");
+    if(newGridSize === null) return; //stops grid from disappearing if selecting 'cancel'
+
+    colorPicker.value = defaultColor;
+
     rainbowButton.removeEventListener('click', rainbowHandler);
     eraseButton.removeEventListener('click', eraseHandler);
 
+    //removes all the old rows and columns and creates new ones
     cols.forEach(col => col.remove());
     rows.forEach(row => row.remove());
 
-    createGrid(size); 
+    createGrid(newGridSize); 
 }
