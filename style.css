@@ -88,18 +88,24 @@ button {
     transition: transform .3s;
 }
 
-button:hover{
+button:enabled:hover{
     transform: scale(1.05);
     box-shadow: rgba(0, 0, 0, 0.24) 2px 2px 4px;
 }
 
-button.rainbow:hover {
+
+
+button.rainbow:enabled:hover {
     animation: rainbowBackground 6s ease infinite;
 }
 
 .clear {
     border-color: #DB0F27;
     color: #DB0F27;
+}
+
+.clear:disabled {
+    color: #d0677397;
 }
 
 .color-picker {
@@ -113,7 +119,7 @@ button.rainbow:hover {
     transition: transform 1s;
 }
 
-.color-picker:hover{
+.color-picker:enabled:hover{
     transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.24) 2px 2px 4px;
     animation: rainbowBorder 6s ease infinite;

@@ -4,9 +4,7 @@ const rainbowButton = document.querySelector('.rainbow');
 const clearButton = document.querySelector(".clear");
 const gridContainer = document.querySelector('.grid');
 const colorPicker = document.querySelector('.color-picker');
-const defaultColor = '#222222';
-const activeButton = '#eeeeee';
-const inactiveButton = 'white';
+const defaultColor = 'black';
 
 //functions
 function createGrid(gridSize) {
@@ -69,6 +67,18 @@ function changeSize() {
     changeButton.addEventListener('mouseup', changeSizeHandler);
 }
 
+//disables or enables all buttons except for the parameter button
+function toggleButtonDisable(exceptionButton, isDisabled){
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        if(button.textContent !== exceptionButton.textContent){
+            button.disabled = isDisabled;
+        }
+    })
+    colorPicker.disabled = isDisabled ? true : false;
+    colorPicker.value = isDisabled ? '#cccccc' : defaultColor;
+}
+
 //function calls
 createGrid(30);
 changeSize();
@@ -79,14 +89,11 @@ function eraseHandler(){
     colorPicker.value = defaultColor;
 
     if(eraseButton.classList.contains('.erase')) {
-        rainbowButton.disabled = true;
+        toggleButtonDisable(eraseButton, true);
         colorPicker.disabled = true;
-        eraseButton.style.backgroundColor = activeButton;
         setSquareColor('white');
     } else {
-        eraseButton.style.backgroundColor = inactiveButton;
-        rainbowButton.disabled = false;
-        colorPicker.disabled = false;
+        toggleButtonDisable(eraseButton, false);
         draw();
     }
 }
@@ -98,9 +105,7 @@ function rainbowHandler() {
     colorPicker.value = defaultColor;
 
     if(rainbowButton.classList.contains('.color')) {
-        eraseButton.disabled = true;
-        colorPicker.disabled = true;
-        rainbowButton.style.backgroundColor = activeButton;
+        toggleButtonDisable(rainbowButton, true);
         squares.forEach(square => square.addEventListener('mousemove', (e) => {
             if(e.buttons == 1) { //checks if the mouse button is down
                 const randomColor = Math.floor(Math.random()*16777215).toString(16);
@@ -108,9 +113,7 @@ function rainbowHandler() {
                 }
             }));
     } else {
-        rainbowButton.style.backgroundColor = inactiveButton;
-        eraseButton.disabled = false;
-        colorPicker.disabled = false;
+        toggleButtonDisable(rainbowButton, false);
         draw();
         }
 }
@@ -119,14 +122,16 @@ function changeSizeHandler(){
     let cols = document.querySelectorAll('.grid-col');
     let rows = document.querySelectorAll('.grid-row');
     let newGridSize = prompt("What size do you want the new grid to be? (max. 100)");
+    if(newGridSize < 1 || newGridSize > 100 || !Number(newGridSize)) {
+        alert("Please enter a number between 1 and 100.");
+        return;
+    }
     if(newGridSize === null) return; //stops grid from disappearing if selecting 'cancel'
 
     colorPicker.value = defaultColor;
 
     rainbowButton.removeEventListener('click', rainbowHandler);
-    rainbowButton.style.backgroundColor = inactiveButton;
     eraseButton.removeEventListener('click', eraseHandler);
-    eraseButton.style.backgroundColor = inactiveButton;
 
     //removes all the old rows and columns and creates new ones
     cols.forEach(col => col.remove());
