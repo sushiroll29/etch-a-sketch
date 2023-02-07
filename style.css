@@ -94,8 +94,7 @@ button:enabled:hover{
 }
 
 
-
-button.rainbow:enabled:hover {
+button.rainbow:enabled:hover, .rainbow.color {
     animation: rainbowBackground 6s ease infinite;
 }
 
@@ -119,7 +118,7 @@ button.rainbow:enabled:hover {
     transition: transform 1s;
 }
 
-.color-picker:enabled:hover{
+.color-picker:enabled:hover, .color-picker:enabled:focus{
     transform: scale(1.1);
     box-shadow: rgba(0, 0, 0, 0.24) 2px 2px 4px;
     animation: rainbowBorder 6s ease infinite;

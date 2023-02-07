@@ -79,6 +79,13 @@ function toggleButtonDisable(exceptionButton, isDisabled){
     colorPicker.value = isDisabled ? '#cccccc' : defaultColor;
 }
 
+//returns random pastel-ish color
+function getColor(){ 
+    return "hsl(" + 360 * Math.random() + ',' +
+               (45 + 50 * Math.random()) + '%,' + 
+               (75 + 10 * Math.random()) + '%)'
+}
+
 //function calls
 createGrid(30);
 changeSize();
@@ -101,15 +108,14 @@ function eraseHandler(){
 function rainbowHandler() {
     const squares = document.querySelectorAll('.grid-col');
 
-    rainbowButton.classList.toggle('.color');
+    rainbowButton.classList.toggle('color');
     colorPicker.value = defaultColor;
 
-    if(rainbowButton.classList.contains('.color')) {
+    if(rainbowButton.classList.contains('color')) {
         toggleButtonDisable(rainbowButton, true);
         squares.forEach(square => square.addEventListener('mousemove', (e) => {
             if(e.buttons == 1) { //checks if the mouse button is down
-                const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                square.style.backgroundColor = '#' + randomColor;
+                square.style.backgroundColor = getColor();
                 }
             }));
     } else {
